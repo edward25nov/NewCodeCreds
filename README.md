@@ -33,10 +33,15 @@ Detectores: Gitleaks 8.30.1 (reglas), Random Forest (aprendizaje automático) y 
    (`data/`) y la URL de cada repositorio (`snapshot.json`), de donde sale la organización.
 2. **Preparación (notebook 01).** Cada línea candidata se lee con la regla de numeración de
    CredData, se deja una fila por línea y se deduplica por texto. Después se asigna cada línea a
-   los pliegues de tres particiones: aleatoria, por organización y por lenguaje. Los pliegues se
-   guardan en archivos para que todos los detectores usen los mismos.
+   los *folds* de tres particiones: aleatoria, por organización y por lenguaje. Un *fold* es cada
+   una de las partes en que una partición divide los datos. En la aleatoria y en la de
+   organización, el modelo se entrena con todos los *folds* menos uno y se evalúa en el que queda.
+   En la de lenguaje, cada uno de los ocho lenguajes es un *fold* de prueba, y las líneas de
+   configuración, texto y otros siempre quedan en el entrenamiento. Los *folds* se guardan en
+   archivos para que todos los detectores usen los mismos (en el código y en los archivos se
+   llaman `pliegue`, por ejemplo la columna `pliegue_organizacion`).
 3. **Detectores (notebooks 02 y 03).** Gitleaks no se entrena y sirve de referencia. Random
-   Forest y GraphCodeBERT se entrenan una vez por pliegue, así que cada línea recibe una
+   Forest y GraphCodeBERT se entrenan una vez por *fold*, así que cada línea recibe una
    predicción de un modelo que no la vio.
 4. **Evaluación (notebook 04).** Para cada detector se compara su desempeño con una partición no
    vista frente a la aleatoria, sobre las mismas líneas. El intervalo de confianza sale de un
@@ -62,13 +67,13 @@ Con lenguajes no vistos, el F1 de Random Forest baja 0.118 [−0.160, −0.086].
 ```
 NewCodeCreds/
 ├── notebooks/
-│   ├── 01_preparacion_y_particiones.ipynb   tabla de análisis, deduplicación y pliegues
+│   ├── 01_preparacion_y_particiones.ipynb   tabla de análisis, deduplicación y folds
 │   ├── 02_gitleaks_y_random_forest.ipynb    predicciones de Gitleaks y Random Forest
 │   ├── 03_graphcodebert_mps.ipynb           ajuste de GraphCodeBERT en la GPU del Mac
 │   ├── 04_evaluacion_resultados.ipynb       métricas, diferencias pareadas, figuras y muestra
 │   └── ids_utils.py                         funciones que importan los cuatro notebooks
 ├── datos_procesados/                        predicciones y rasgos (sin texto de código)
-├── resultados/                              tablas CSV, asignación de pliegues y muestra del dataset
+├── resultados/                              tablas CSV, asignación de folds y muestra del dataset
 ├── figuras/                                 figuras del documento
 ├── Actividad 05 - (Estado actual del proyecto).docx / .pdf
 └── requirements.txt
@@ -79,8 +84,8 @@ GitHub o en VS Code**, sin ejecutar nada.
 
 **Muestra del dataset:**
 [`resultados/credata_muestra_actividad05.csv`](resultados/credata_muestra_actividad05.csv). Son
-1,000 líneas del conjunto deduplicado (100 T y 100 no T por pliegue de la partición por
-organización), con metadatos, variables derivadas, pliegues, rasgos y predicciones de los tres
+1,000 líneas del conjunto deduplicado (100 T y 100 no T por *fold* de la partición por
+organización), con metadatos, variables derivadas, *folds*, rasgos y predicciones de los tres
 detectores. No incluye el texto de las líneas de código.
 
 **Lo que no está en el repositorio** (cada uno lo genera en su computadora):
@@ -195,15 +200,15 @@ notebook, elige el kernel **Python (newcodecreds)** y usa **Run All**, en este o
 
 | Notebook | Qué hace | Tiempo aprox. (Mac M5 Pro) | Qué debes ver |
 |---|---|---|---|
-| 01 | Tabla de análisis y pliegues | 10 s | `Conjunto deduplicado: 49629 líneas, 15205 T (30.6%)` |
+| 01 | Tabla de análisis y *folds* | 10 s | `Conjunto deduplicado: 49629 líneas, 15205 T (30.6%)` |
 | 02 | Gitleaks y Random Forest (23 ajustes) | 3 min | Tabla cruzada con 7,005 T detectadas por Gitleaks |
-| 03 | GraphCodeBERT (opcional, ver paso 6) | 1 h | Un tiempo por pliegue, como `aleatorio 0 342 s` |
+| 03 | GraphCodeBERT (opcional, ver paso 6) | 1 h | Un tiempo por *fold*, como `aleatorio 0 342 s` |
 | 04 | Métricas, figuras y muestra | 1 min | Las tablas y figuras del documento |
 
 - Cada notebook usa los archivos que deja el anterior, así que el orden importa.
 - Los notebooks esperan correr con la carpeta `notebooks/` como directorio de trabajo, que es lo
   que hace VS Code al abrirlos.
-- Los pliegues no se recalculan: el notebook 01 los lee de `resultados/asignacion_pliegues_*.csv`.
+- Los *folds* no se recalculan: el notebook 01 los lee de `resultados/asignacion_pliegues_*.csv`.
   Así todos obtenemos la misma partición aunque tengamos otra versión de scikit-learn.
 - Random Forest puede cambiar alrededor del 1.5% de sus predicciones entre computadoras. Las
   métricas globales coinciden hasta el tercer decimal, pero las cifras por categoría de
@@ -215,7 +220,7 @@ notebook, elige el kernel **Python (newcodecreds)** y usa **Run All**, en este o
 en `datos_procesados/predicciones_graphcodebert.parquet`, y el notebook 04 las incorpora solo.
 
 Si lo vas a correr, necesitas una GPU: MPS en un Mac con Apple Silicon o CUDA en otra máquina. En
-CPU tarda horas por pliegue. La primera vez descarga el modelo `microsoft/graphcodebert-base`
+CPU tarda horas por *fold*. La primera vez descarga el modelo `microsoft/graphcodebert-base`
 (unos 500 MB). `MODO = "rapido"` hace 10 ajustes de unos 6 minutos cada uno. `MODO = "completo"`
 (2 épocas, los ocho lenguajes y 256 tokens) toma unas 15 horas. **Correrlo sobrescribe el
 parquet anterior**, así que conviene hacerlo en una rama.
