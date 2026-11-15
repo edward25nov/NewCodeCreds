@@ -1,0 +1,21 @@
+# Datos con texto de código de CredData (cada archivo conserva la licencia de su proyecto)
+datos_procesados/**/lineas.parquet
+datos_procesados/**/gitleaks_hallazgos.json
+datos_procesados/v1/
+
+# Binario de Gitleaks y su paquete (se descargan, ver README)
+herramientas/
+
+# Archivos temporales de Word
+~$*
+
+# Python y Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Sistema
+.DS_Store
+
+# Editor
+.vscode/

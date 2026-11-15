@@ -1,0 +1,16 @@
+categoria,casos_T,fuga_gitleaks,fuga_rf_aleatorio,fuga_rf_organizacion,fuga_gcb_aleatorio,fuga_gcb_organizacion
+Key,3809,0.118,0.021,0.043,0.007,0.025
+Password,2518,0.943,0.165,0.386,0.013,0.018
+UUID,2210,1.0,0.014,0.027,0.017,0.04
+Secret,1259,0.162,0.06,0.095,0.005,0.006
+PEM Private Key,1156,0.0,0.0,0.0,0.001,0.01
+Auth:Basic Authorization,601,0.992,0.0,0.166,0.003,0.015
+Token,522,0.427,0.138,0.216,0.034,0.125
+URL Credentials,207,1.0,0.217,0.734,0.053,0.087
+Token:UUID,169,0.077,0.0,0.0,0.0,0.0
+Auth,163,0.748,0.11,0.595,0.006,0.012
+AWS Client ID,160,0.644,0.081,0.156,0.019,0.031
+Nonce,146,1.0,0.041,0.082,0.048,0.253
+Key:Secret,124,0.371,0.177,0.258,0.008,0.032
+API:Token,112,0.955,0.009,0.446,0.009,0.018
+NTLM Token:Bearer Authorization:Auth,101,1.0,0.0,0.0,0.0,0.0

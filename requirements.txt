@@ -1,0 +1,11 @@
+# Entorno usado en la Actividad 05 (Python 3.12, Mac con Apple Silicon).
+# Gitleaks 8.30.1 se instala aparte (ver README).
+numpy==1.26.4
+pandas==3.0.2
+pyarrow==24.0.0
+scipy==1.17.1
+scikit-learn==1.8.0
+matplotlib==3.10.9
+torch==2.12.0
+transformers==5.17.0
+ipykernel==7.2.0

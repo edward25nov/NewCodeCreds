@@ -1,0 +1,13 @@
+detector,comparacion,metrica,diferencia,ic95_inf,ic95_sup,n_boot
+Random Forest,Organización - aleatoria,f1,-0.072,-0.121,-0.044,1000
+Random Forest,Organización - aleatoria,mcc,-0.1,-0.153,-0.07,1000
+Random Forest,Organización - aleatoria,recall,-0.092,-0.16,-0.052,1000
+Random Forest,Organización - aleatoria,precision,-0.049,-0.09,-0.028,1000
+GraphCodeBERT,Organización - aleatoria,f1,-0.033,-0.045,-0.02,1000
+GraphCodeBERT,Organización - aleatoria,mcc,-0.048,-0.065,-0.027,1000
+GraphCodeBERT,Organización - aleatoria,recall,-0.018,-0.035,-0.008,1000
+GraphCodeBERT,Organización - aleatoria,precision,-0.046,-0.067,-0.018,1000
+Random Forest,Tipo de archivo - aleatoria,f1,-0.118,-0.16,-0.086,1000
+Random Forest,Tipo de archivo - aleatoria,mcc,-0.136,-0.176,-0.104,1000
+Random Forest,Tipo de archivo - aleatoria,recall,-0.181,-0.239,-0.132,1000
+Random Forest,Tipo de archivo - aleatoria,precision,-0.033,-0.056,-0.017,1000
