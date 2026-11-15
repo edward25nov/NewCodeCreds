@@ -1,4 +1,4 @@
-"""Funciones compartidas por los notebooks de la Actividad 05.
+"""Funciones compartidas por los notebooks del proyecto NewCodeCreds.
 
 Proyecto NewCodeCreds: desempeño de detectores de credenciales en repositorios
 y tipos de archivo no vistos (CredData, commit 86a9182).
