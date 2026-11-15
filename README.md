@@ -222,7 +222,46 @@ parquet anterior**, así que conviene hacerlo en una rama.
 
 ## Para trabajar en grupo
 
-- Antes de empezar: `git pull`.
+La rama `main` está protegida: **no se puede hacer push directo a `main`** ni forzar un push, y
+la rama no se puede borrar. Todo cambio entra por un pull request (PR). No hace falta que otra
+persona lo apruebe: cada uno puede unir su propio PR.
+
+### Flujo para cada cambio
+
+1. Actualiza `main` y crea una rama con un nombre que diga qué vas a hacer:
+
+   ```bash
+   git switch main
+   git pull
+   git switch -c actividad-06
+   ```
+
+2. Haz tus cambios y tus commits en esa rama. Usamos
+   [Conventional Commits](https://www.conventionalcommits.org/es/) en español, por ejemplo
+   `feat(notebooks): agregar umbral con costo asimétrico`.
+3. Sube la rama y abre el PR, desde la terminal con [GitHub CLI](https://cli.github.com/) o
+   desde la página del repositorio:
+
+   ```bash
+   git push -u origin actividad-06
+   gh pr create --fill
+   ```
+
+4. Revisa en el PR que los cambios sean los esperados y únelo con **Squash and merge**
+   (`gh pr merge --squash --delete-branch`).
+5. Vuelve a `main` y actualízala: `git switch main && git pull`.
+
+Si `git push` responde que `main` está protegida, hiciste commit en `main` por error. Lleva esos
+commits a una rama nueva y deja `main` igual que en GitHub:
+
+```bash
+git switch -c mi-rama                         # la rama nueva conserva tus commits
+git switch main && git reset --hard origin/main
+git switch mi-rama && git push -u origin mi-rama
+```
+
+### Acuerdos
+
 - Si vas a modificar un notebook, avisa en el grupo. Dos personas que editan el mismo `.ipynb` a
   la vez generan conflictos difíciles de resolver.
 - Antes de hacer commit de un notebook, revisa que ninguna salida muestre texto de líneas de
