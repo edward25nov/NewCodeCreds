@@ -25,6 +25,27 @@ Detectores: Gitleaks 8.30.1 (reglas), Random Forest (aprendizaje automático) y 
 (modelo de lenguaje). Datos: [CredData](https://github.com/Samsung/CredData) de Samsung, commit
 `86a9182`.
 
+## Cómo funciona el pipeline
+
+![Pipeline de NewCodeCreds: datos, preparación, detectores, evaluación y salidas](figuras/pipeline.svg)
+
+1. **Datos.** CredData trae las etiquetas (`meta/`), el código con los secretos ofuscados
+   (`data/`) y la URL de cada repositorio (`snapshot.json`), de donde sale la organización.
+2. **Preparación (notebook 01).** Cada línea candidata se lee con la regla de numeración de
+   CredData, se deja una fila por línea y se deduplica por texto. Después se asigna cada línea a
+   los pliegues de tres particiones: aleatoria, por organización y por lenguaje. Los pliegues se
+   guardan en archivos para que todos los detectores usen los mismos.
+3. **Detectores (notebooks 02 y 03).** Gitleaks no se entrena y sirve de referencia. Random
+   Forest y GraphCodeBERT se entrenan una vez por pliegue, así que cada línea recibe una
+   predicción de un modelo que no la vio.
+4. **Evaluación (notebook 04).** Para cada detector se compara su desempeño con una partición no
+   vista frente a la aleatoria, sobre las mismas líneas. El intervalo de confianza sale de un
+   bootstrap que remuestrea organizaciones completas.
+5. **Salidas.** Tablas, figuras, la muestra del dataset y el documento de la actividad.
+
+La imagen también está en PNG (`figuras/pipeline.png`, 2720 × 1320) para usarla en
+presentaciones.
+
 ## Resultados preliminares (Actividad 05)
 
 | Detector | Partición aleatoria (F1) | Organización no vista (F1) | Diferencia [IC 95%] |

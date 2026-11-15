@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="660" viewBox="0 0 1360 660" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b6a66"/>
+    </marker>
+    <style>
+      .col { font-size: 15px; font-weight: 700; fill: #1f1e1c; }
+      .sub { font-size: 12px; fill: #6b6a66; }
+      .tit { font-size: 14px; font-weight: 700; fill: #1f1e1c; }
+      .txt { font-size: 12px; fill: #3d3c39; }
+      .num { font-size: 12px; font-weight: 700; fill: #1f1e1c; }
+      .linea { stroke: #8a8984; stroke-width: 1.6; fill: none; }
+      .nota { font-size: 11px; fill: #6b6a66; font-style: italic; }
+    </style>
+  </defs>
+
+  <rect width="1360" height="660" fill="#ffffff"/>
+
+  <!-- Encabezados de columna -->
+  <text x="30" y="34" class="col">1. Datos</text>
+  <text x="30" y="52" class="sub">CredData, commit 86a9182</text>
+  <text x="280" y="34" class="col">2. Preparación</text>
+  <text x="280" y="52" class="sub">notebook 01</text>
+  <text x="560" y="34" class="col">3. Detectores</text>
+  <text x="560" y="52" class="sub">notebooks 02 y 03</text>
+  <text x="870" y="34" class="col">4. Evaluación</text>
+  <text x="870" y="52" class="sub">notebook 04</text>
+  <text x="1150" y="34" class="col">5. Salidas</text>
+  <text x="1150" y="52" class="sub">resultados/ y figuras/</text>
+
+  <!-- 1. Datos -->
+  <rect x="30" y="75" width="210" height="95" rx="8" fill="#f1f0ec" stroke="#c9c8c3"/>
+  <text x="44" y="100" class="tit">meta/</text>
+  <text x="44" y="122" class="txt">Revisión humana de líneas</text>
+  <text x="44" y="140" class="num">67,896 etiquetas</text>
+  <text x="44" y="158" class="txt">T (credencial), F o X</text>
+
+  <rect x="30" y="190" width="210" height="95" rx="8" fill="#f1f0ec" stroke="#c9c8c3"/>
+  <text x="44" y="215" class="tit">data/</text>
+  <text x="44" y="237" class="txt">Código de 337 repositorios</text>
+  <text x="44" y="255" class="txt">con los secretos ofuscados</text>
+  <text x="44" y="273" class="txt">(1 GB, se queda en local)</text>
+
+  <rect x="30" y="305" width="210" height="80" rx="8" fill="#f1f0ec" stroke="#c9c8c3"/>
+  <text x="44" y="330" class="tit">snapshot.json</text>
+  <text x="44" y="352" class="txt">URL de GitHub de cada repositorio</text>
+  <text x="44" y="370" class="num">307 organizaciones</text>
+
+  <!-- 2. Preparación -->
+  <rect x="280" y="75" width="240" height="75" rx="8" fill="#e6effa" stroke="#9dbbe3"/>
+  <text x="294" y="99" class="tit">Leer cada línea</text>
+  <text x="294" y="119" class="txt">Con la regla de numeración</text>
+  <text x="294" y="137" class="txt">de CredData</text>
+
+  <rect x="280" y="170" width="240" height="75" rx="8" fill="#e6effa" stroke="#9dbbe3"/>
+  <text x="294" y="194" class="tit">Una fila por línea</text>
+  <text x="294" y="214" class="num">64,797 líneas (15,280 T)</text>
+  <text x="294" y="232" class="txt">Si alguna fila es T, la línea es T</text>
+
+  <rect x="280" y="265" width="240" height="75" rx="8" fill="#e6effa" stroke="#9dbbe3"/>
+  <text x="294" y="289" class="tit">Deduplicar por texto</text>
+  <text x="294" y="309" class="num">49,629 líneas (15,205 T)</text>
+  <text x="294" y="327" class="txt">Quita casi solo negativos</text>
+
+  <rect x="280" y="360" width="240" height="115" rx="8" fill="#e6effa" stroke="#9dbbe3"/>
+  <text x="294" y="384" class="tit">Pliegues fijos (CSV)</text>
+  <text x="294" y="405" class="txt">• Aleatoria: 5 pliegues</text>
+  <text x="294" y="424" class="txt">• Por organización: 5 pliegues</text>
+  <text x="294" y="443" class="txt">• Por lenguaje: 8, uno fuera</text>
+  <text x="294" y="462" class="txt">   a la vez</text>
+
+  <!-- 3. Detectores -->
+  <rect x="560" y="75" width="270" height="110" rx="8" fill="#f4f4f2" stroke="#a9a8a3"/>
+  <text x="574" y="99" class="tit">Gitleaks 8.30.1 · reglas</text>
+  <text x="574" y="121" class="txt">Corre sobre data/; un hallazgo</text>
+  <text x="574" y="139" class="txt">marca la línea donde cae</text>
+  <text x="574" y="157" class="num">8,350 hallazgos, 28 reglas</text>
+  <text x="574" y="175" class="txt">No se entrena: es la referencia</text>
+
+  <rect x="560" y="205" width="270" height="110" rx="8" fill="#fdebe3" stroke="#eda98a"/>
+  <text x="574" y="229" class="tit">Random Forest · ML</text>
+  <text x="574" y="251" class="txt">34 rasgos de la línea + 3,000</text>
+  <text x="574" y="269" class="txt">n-gramas de caracteres</text>
+  <text x="574" y="287" class="num">23 ajustes, ~7 s cada uno</text>
+  <text x="574" y="305" class="txt">Solo ve el texto de la línea</text>
+
+  <rect x="560" y="335" width="270" height="110" rx="8" fill="#e3f4ec" stroke="#85cba9"/>
+  <text x="574" y="359" class="tit">GraphCodeBERT · lenguaje</text>
+  <text x="574" y="381" class="txt">Línea + una línea de contexto,</text>
+  <text x="574" y="399" class="txt">en la GPU del Mac (MPS)</text>
+  <text x="574" y="417" class="num">10 ajustes, ~6 min cada uno</text>
+  <text x="574" y="435" class="txt">Modo rápido: 1 época, 20,000 líneas</text>
+
+  <text x="560" y="470" class="nota">Cada línea recibe una predicción de un modelo</text>
+  <text x="560" y="486" class="nota">que no la vio al entrenar (fuera de muestra).</text>
+
+  <!-- 4. Evaluación -->
+  <rect x="870" y="75" width="240" height="95" rx="8" fill="#e8f3f4" stroke="#8cc2c6"/>
+  <text x="884" y="99" class="tit">Métricas</text>
+  <text x="884" y="121" class="txt">Precisión, recall, F1, MCC,</text>
+  <text x="884" y="139" class="txt">PR-AUC y fuga residual</text>
+  <text x="884" y="157" class="txt">(1 − recall)</text>
+
+  <rect x="870" y="190" width="240" height="130" rx="8" fill="#e8f3f4" stroke="#8cc2c6"/>
+  <text x="884" y="214" class="tit">Diferencia pareada</text>
+  <text x="884" y="236" class="txt">No vista − aleatoria, sobre</text>
+  <text x="884" y="254" class="txt">las mismas líneas</text>
+  <text x="884" y="276" class="txt">IC 95% con bootstrap que</text>
+  <text x="884" y="294" class="txt">remuestrea organizaciones</text>
+  <text x="884" y="312" class="txt">(1,000 veces)</text>
+
+  <rect x="870" y="340" width="240" height="105" rx="8" fill="#e8f3f4" stroke="#8cc2c6"/>
+  <text x="884" y="364" class="tit">Análisis complementarios</text>
+  <text x="884" y="386" class="txt">• Por pliegue (OpenSSL)</text>
+  <text x="884" y="405" class="txt">• Sensibilidad (4 subconjuntos)</text>
+  <text x="884" y="424" class="txt">• Fuga por categoría</text>
+
+  <!-- 5. Salidas -->
+  <rect x="1150" y="75" width="180" height="75" rx="8" fill="#ffffff" stroke="#a9a8a3"/>
+  <text x="1164" y="99" class="tit">Tablas CSV</text>
+  <text x="1164" y="119" class="txt">Global, pareadas,</text>
+  <text x="1164" y="137" class="txt">lenguaje, fuga</text>
+
+  <rect x="1150" y="170" width="180" height="75" rx="8" fill="#ffffff" stroke="#a9a8a3"/>
+  <text x="1164" y="194" class="tit">Figuras</text>
+  <text x="1164" y="214" class="txt">Desempeño, lenguajes</text>
+  <text x="1164" y="232" class="txt">y pliegues</text>
+
+  <rect x="1150" y="265" width="180" height="75" rx="8" fill="#ffffff" stroke="#a9a8a3"/>
+  <text x="1164" y="289" class="tit">Muestra CSV</text>
+  <text x="1164" y="309" class="txt">1,000 líneas,</text>
+  <text x="1164" y="327" class="txt">sin texto de código</text>
+
+  <rect x="1150" y="360" width="180" height="85" rx="8" fill="#ffffff" stroke="#a9a8a3"/>
+  <text x="1164" y="384" class="tit">Documento</text>
+  <text x="1164" y="404" class="txt">Estado del proyecto</text>
+  <text x="1164" y="422" class="txt">(docx y pdf)</text>
+
+  <!-- Flechas 1 a 2 -->
+  <path class="linea" d="M240,100 L280,100" marker-end="url(#flecha)"/>
+  <path class="linea" d="M240,237 L266,237 L266,132 L280,132" marker-end="url(#flecha)"/>
+  <path class="linea" d="M240,345 L266,345 L266,417 L280,417" marker-end="url(#flecha)"/>
+  <!-- dentro de 2 -->
+  <path class="linea" d="M400,150 L400,170" marker-end="url(#flecha)"/>
+  <path class="linea" d="M400,245 L400,265" marker-end="url(#flecha)"/>
+  <path class="linea" d="M400,340 L400,360" marker-end="url(#flecha)"/>
+  <!-- data/ a Gitleaks (por arriba) -->
+  <path class="linea" d="M240,205 L252,205 L252,64 L545,64 L545,100 L560,100" stroke-dasharray="5 4" marker-end="url(#flecha)"/>
+  <!-- 2 a 3 -->
+  <path class="linea" d="M520,417 L540,417 L540,140 L560,140" marker-end="url(#flecha)"/>
+  <path class="linea" d="M540,260 L560,260" marker-end="url(#flecha)"/>
+  <path class="linea" d="M540,390 L560,390" marker-end="url(#flecha)"/>
+  <!-- 3 a 4 -->
+  <path class="linea" d="M830,130 L850,130"/>
+  <path class="linea" d="M830,260 L850,260"/>
+  <path class="linea" d="M830,390 L850,390"/>
+  <path class="linea" d="M850,122 L850,392"/>
+  <path class="linea" d="M850,122 L870,122" marker-end="url(#flecha)"/>
+  <path class="linea" d="M850,255 L870,255" marker-end="url(#flecha)"/>
+  <path class="linea" d="M850,392 L870,392" marker-end="url(#flecha)"/>
+  <!-- 4 a 5 -->
+  <path class="linea" d="M1110,122 L1130,122"/>
+  <path class="linea" d="M1110,255 L1130,255"/>
+  <path class="linea" d="M1110,392 L1130,392"/>
+  <path class="linea" d="M1130,112 L1130,402"/>
+  <path class="linea" d="M1130,112 L1150,112" marker-end="url(#flecha)"/>
+  <path class="linea" d="M1130,207 L1150,207" marker-end="url(#flecha)"/>
+  <path class="linea" d="M1130,302 L1150,302" marker-end="url(#flecha)"/>
+  <path class="linea" d="M1130,402 L1150,402" marker-end="url(#flecha)"/>
+
+  <!-- Idea central -->
+  <rect x="30" y="515" width="1300" height="120" rx="10" fill="#fbf7ea" stroke="#e3cf8f"/>
+  <text x="50" y="545" class="tit">La idea del diseño</text>
+  <text x="50" y="568" class="txt">Entre particiones solo cambia si el modelo vio o no, al entrenar, la organización o el lenguaje de la línea. Por eso la diferencia de desempeño</text>
+  <text x="50" y="586" class="txt">sobre las mismas líneas mide cuánto sobrestima la evaluación aleatoria el desempeño en código nuevo.</text>
+  <text x="50" y="614" class="num">F1 con organización no vista: Random Forest −0.072 [−0.121, −0.044] · GraphCodeBERT −0.033 [−0.045, −0.020] · con lenguaje no visto: Random Forest −0.118</text>
+</svg>
